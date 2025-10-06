@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marin County Planning Application Checklist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        
+        nav h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        nav a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background: #2980b9;
+        }
+        
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .section-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .item {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        
+        .item h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .item-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .requirements {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        .requirements h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .requirements ul {
+            margin-left: 20px;
+        }
+        
+        .requirements li {
+            margin: 5px 0;
+        }
+        
+        .element-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+        
+        .element-label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .special-req {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .special-req h5 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        .special-req-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 3px;
+        }
+        
+        .special-req-type {
+            font-weight: bold;
+            color: #856404;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            margin-top: 40px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        // In a production environment, you would load this from an external JSON file:
+        // fetch('checklist-data.json').then(response => response.json()).then(data => renderPage(data));
+        
+        // For this example, the JSON data is embedded directly
+        const checklistData = {"title":"Marin County Planning Application Checklist","version":"Version 10","date":"February 2025","sections":[{"id":"engineering","name":"Engineering and Surveying","description":"The following items are often best completed by a civil engineer or surveyor.","items":[{"number":"1","name":"Site Plan","description":"A Site Plan must be submitted with information drawn to conventional scale, preferably 1:10 or 1:8","elements":[{"label":"A. Vicinity Map and Directions","description":"Show subject property and surrounding roads with directions from main road"},{"label":"B. Boundaries","description":"All existing and proposed lot lines with metes and bounds, open space, easements and rights of way"},{"label":"C. Structures","description":"Footprints and use of all existing and proposed structures with minimum setbacks dimensioned"},{"label":"D. Roofs and Building Height","description":"Roof plans with pitch, slope direction, mechanical equipment, overlaid on topographic contours"},{"label":"E. Lighting","description":"All exterior lighting locations and types"},{"label":"F. Noise Generators","description":"Location of pool equipment, air conditioners, generators with specifications"},{"label":"G. Natural Features","description":"Rock outcrops, ridgelines, wetlands, creeks, vegetation, trees 6+ inches diameter"},{"label":"H. Topography","description":"Existing and proposed contours at minimum 5-foot intervals"},{"label":"I. Parking and Access","description":"Off-street parking, loading areas, driveways with dimensions and turning radius"},{"label":"J. On-Site Water Provision","description":"Location of wells, water storage tanks, springs on subject and adjoining properties"},{"label":"K. Associated Site Design Elements","description":"Signs, propane tanks, trash enclosures, lighting fixtures, mailboxes, fencing, paths"}],"specialRequirements":[{"type":"Sign Applications","description":"Location, dimensions, cumulative area, height, sign copy, lettering size and color"},{"type":"Lot Line Adjustment","description":"Must be prepared by licensed surveyor with existing and proposed property lines"},{"type":"Site Plan Review (Shoreline)","description":"Delineation of mean higher high tide and fill calculations"},{"type":"Floating Home","description":"Distances to adjacent homes, dock location, berthing space dimensions"},{"type":"Tentative Map","description":"Must be prepared by registered civil engineer or licensed surveyor, 8 complete sets required"},{"type":"Certificate of Compliance","description":"Show parent legal lot and boundaries of subject unit"}]},{"number":"2","name":"Grading Plan","description":"Preliminary grading plan with existing and proposed contours, lot slope, limits of grading","requirements":["Amount of excavation and fill in cubic yards","Total disturbance area","Off-haul amount","Location of deposition and borrow sites"]},{"number":"3","name":"Drainage Plan","description":"Prepared by qualified civil engineer, hydrologist, architect or landscape architect","requirements":["Show existing and proposed drainage","Direction and path of water dispersal","Impervious surfaces","Hydrologic calculations may be required"]},{"number":"4","name":"Utilities Plan","description":"Location of all public and private utility connections","requirements":["Methods of extension (overhead or underground)","Size and capacity may be required"]},{"number":"5","name":"Septic System Plan","description":"For properties not served by sanitary sewer district","requirements":["Location of septic tank and disposal fields","Reserve area","Wells within 150 feet","Floor area calculations by structure and occupancy code"]},{"number":"6","name":"Development Envelopes","description":"Envelopes for existing and future structures, roads, utilities, septic leach fields"},{"number":"7","name":"Site Boundary Survey","description":"Must be prepared and signed by licensed surveyor","requirements":["All property lines and boundaries","Rights-of-way and easements","Locations of structures and improvements","NAVD88 to MLLW conversion verification if required"]},{"number":"8","name":"Site Topography Survey","description":"Prepared by licensed surveyor with seal and signature","requirements":["2-foot contours for slopes ≤15%","5 or 10-foot contours for slopes >15%","Natural features and human-made improvements","Creek details with bank contours and flow channels","Scale preferably 1 inch = 10 feet"]},{"number":"9","name":"Site Staking","description":"Staking plan for development features prepared by architect, designer, or engineer","requirements":["Stakes at 25-foot intervals","Approximately 1.5 feet high","Bright colored tops","Labeled to indicate features","Written notification required when installed"]},{"number":"10","name":"Story Poles","description":"Show locations and heights to demonstrate maximum roof heights","requirements":["Connected by orange construction netting","Must withstand elements through permit process","Netting at least 1.5 feet wide","Demonstrate height, mass, and bulk of structure"]},{"number":"11","name":"Stormwater Best Management Practice Plans","description":"Stormwater Pollution Prevention Plan (SWPP) and Erosion Sediment Control Plan (ESCP)","requirements":["Prepared by registered civil engineer, architect, or landscape architect","See www.mcstoppp.org for guidance and templates","Preliminary Operations and Maintenance Plan may be required"]},{"number":"12","name":"Constraints Map","description":"Composite map showing site boundaries overlaid by environmental constraints","requirements":["Tree Protection Zones","Wetland Conservation Areas","Stream Conservation areas","ESHA buffers","Slope percentages: 0-15%, 16-24%, 25-34%, >34%","Flood zones and geologically unstable areas"]},{"number":"13","name":"Emergency Access and Evacuation Map","description":"Map from subject property to arterial road or highway","requirements":["Width of right-of-way, road prism, paved roadway","Horizontal and vertical obstructions","Road profiles for segments >15% grade","Turnarounds, turnouts, bridges, culverts","Parking areas and restrictions","Simplified version acceptable for ADU applications"]}]},{"id":"architecture","name":"Architecture","description":"The following items are typically completed by architects and landscape architects.","items":[{"number":"14","name":"Project Information","description":"Written summary of key project components","sheetRequirements":{"maxSize":"24 inches by 36 inches","northArrow":"Required on every plan","scaleReference":"Min 1/8 inch to 1 foot, preferably 1/4 inch to 1 foot","contactData":"Name, address, phone of owner, applicant, architect, engineer, surveyor"},"projectData":["Existing and proposed lot area (dry land and total for submerged lots)","Existing and proposed Building Area","Existing and proposed Floor Area","Existing and proposed Floor Area Ratio","Proposed area of additional disturbance","Existing and proposed Lot Coverage (impervious and pervious)","Grading calculations in cubic yards (cut, fill, off-haul)","Existing and proposed parking","Minimum setbacks for exterior walls","Maximum height of proposed building area"]},{"number":"15","name":"Floor Plans","description":"Fully dimensioned floor plans for all levels","requirements":["Show garage, food prep facilities, windows, doors, stairways","Floor area calculations based on dimensioned plans","Existing area outlined with dashed lines","Additions shaded, demolitions hatched"]},{"number":"16","name":"Building Demolition Plans","description":"All building area for demolition shown as hatched with dashed lines","requirements":["Linear distance calculations of existing exterior walls","Linear distance of walls to be demolished","Must conform with Development Code definition of demolition"]},{"number":"17","name":"Building Elevations","description":"Fully dimensioned elevations of all structures","requirements":["Roof ridgeline, finished floor, foundation elevations","Exterior materials (siding, roofing, glazing)","Height in relation to topography","All exterior lighting","Preferred scale: 1/4 inch per foot","Water line at high tide for Floating Home applications"]},{"number":"18","name":"Cross Sections","description":"Cross section through proposed structure based on accurate topography","requirements":["Finished floor, foundation line, roof ridge elevations","Existing and finished grades","Site cross section may show relative elevations to adjoining properties","Water line at high tide for Floating Home applications"]},{"number":"19","name":"Materials, Colors, and Details","description":"Photos of color chips and exterior building material samples","requirements":["Samples for painting, roofing, siding, window casings, trim","Accurate color representations properly labeled","Stucco texture indication","Complete details for retaining walls and fencing","Cut sheets for exterior lighting fixtures","Materials sample board (8.5\\\" x 14\\\") may be required"]},{"number":"20","name":"Landscape/Revegetation Plan","description":"Plan indicating existing and proposed trees and plant materials","requirements":["Scientific and common names","Native status (California, Bay Area, or Marin)","Container size at planting and height at maturity","Irrigation method and location","Existing trees 6+ inches diameter at breast height (4.5 feet)","Graphically distinguish existing vs. proposed vegetation","Same scale as site plan"]},{"number":"21","name":"Vegetation Management Plan","description":"Addresses vegetation modification for defensible space","requirements":["Prepared by qualified arborist, forester, landscape architect or designer","Existing vegetation types within Defensible Space area","Every tree >6 inches diameter accurately depicted","Proposed management for all vegetation types","Detailed removal/pruning plans for each tree"]},{"number":"22","name":"Master Plan Exhibit","description":"Provides parameters for future development","criteria":["Density, lot areas and dimensions","Development areas, open space, environmental buffers","Site planning, circulation, parking","Grading, storm water management, landscaping areas","Structure height, building/floor area, FAR, lot coverage, setbacks","Architectural and site design standards"],"reviewProcedures":["Ministerial review requirements","Discretionary review requirements","Procedures to deviate from Master Plan criteria"]}]},{"id":"special-studies","name":"Special Studies and Documents","description":"The following information can be compiled by the applicant in consultation with a qualified professional.","items":[{"number":"23","name":"Preliminary Title Report","description":"Current report prepared within last 6 months (2 copies)","requirements":["Reflect current property status","All recorded easements","Proof of ownership","Issued from a Title Company"]},{"number":"24","name":"Telecommunications Facilities","description":"Guide to Marin County Telecommunications Facilities Policy Plan Application Requirements and Checklist must be completed"},{"number":"25","name":"Historic Checklist (Coastal Zone)","description":"Local Coastal Program's Historic Review Checklist","requirements":["Required for all new construction and alterations in historic areas","Required for pre-1930 structures in coastal zone outside historic areas","Applies to all structures including signs"]},{"number":"26","name":"Operational Characteristics","description":"Information for non-residential uses","requirements":["Maximum staff on site at any one time","Hours of operation (public and non-public)","Peak hours with total staff, customers, visitors","Special events schedule with maximum attendance","Delivery schedule and frequency","Noise levels and sources","Pedestrian and vehicle paths of travel"]},{"number":"27","name":"Property Deed Information","description":"Complete chain of title documentation","requirements":["Chain of title to parent legal lot of record","All recorded subdivisions, surveys, adjudicated settlements","Certified as complete by title officer, attorney, or surveyor","Signed statement with date and instrument number"]},{"number":"28","name":"Property Status Information","description":"Historical documentation of property","requirements":["Copies of Assessor's Records","Property history records (affidavits, utility bills, maps, photographs)","State or Federal agency permits","Property appraisals by qualified appraiser"]},{"number":"29","name":"Evidence of Water Supply","description":"2 copies of reports with tests and engineering data","requirements":["For mutual companies: quantity, quality, safety evidence","For wells/springs: adequate tests and engineering data","Evidence for each lot and fire protection","Coastal Zone: report by State Licensed contractors/engineers"]},{"number":"30","name":"Photo-Simulations and 3D Renderings","description":"2 copies prepared by qualified professional","requirements":["Based on Digital Terrain Model","Normal camera lens (42-50mm)","Two versions: without and with proposed landscaping (5 years growth)","Vantage points approved by Planning Division","Subject to peer review at Director's discretion","3D renderings in elevation or isometric view may be required"]},{"number":"31","name":"Acoustical Study","description":"Prepared by qualified acoustical engineer","requirements":["Quantify maximum noise levels affecting or from project","Standard acoustical engineering methods","Time of day, duration, and regularity","Regular operations and special events"]},{"number":"32","name":"Arborist's Report","description":"Evaluation of trees affected by development","requirements":["Prepared by qualified arborist","Evaluate 'protected' or 'heritage' trees (or significant vegetation in coastal zone)","Health assessment of trees","Adverse effects evaluation","Tree protection zones recommendations","Replacement tree locations","Identify exotic and invasive trees","Subject to peer review at Director's discretion"]},{"number":"33","name":"Agricultural Management Plan","description":"Address ongoing agricultural use of property","requirements":["Identify and assess useable agricultural land","Identify potential, existing, proposed agricultural uses","Long-term management and preservation plan","Water supply and demand analysis","Impact of development on agricultural use","Marketing/business plan","Farmer/rancher background description"]},{"number":"34","name":"Photometric Study","description":"Prepared by lighting expert","requirements":["Existing and proposed ground-level lighting intensity","Measured in foot-candles","Include subject property and affected surrounding properties"]},{"number":"35","name":"Preliminary Geotechnical Report","description":"2 copies prepared by certified engineering geologist or soil engineer","partA":{"title":"Soils Reconnaissance","items":["Field investigation of soils matters","Stability, erosion, settlement assessment","Feasibility of construction","Hazards and mitigation methods","Bluff retreat rate estimation (100-year threat)"]},"partB":{"title":"Final Investigation","items":["Field investigation and laboratory tests","Grading, filling, earthwork recommendations","Foundation and pavement design","Subsurface drainage recommendations","Erosion control and sedimentation prevention"]}},{"number":"36","name":"Hydrological Report","description":"2 copies prepared by qualified hydrologist, geomorphologist, or engineer","requirements":["Pre-project and post-project storm water runoff calculations","Assess downstream erosion likelihood","Channel instability assessment","Flooding impact evaluation","Mitigation measures if significant impacts found","Subject to peer review at Director's discretion"]},{"number":"37","name":"Biological Site Assessment","description":"Prepared by qualified biologist","requirements":["Evidence of sensitive biological resources","Habitat value relative to special status species","Setbacks and development timing recommendations","ESHA, stream channels, riparian vegetation mapping","Watercourse habitat value evaluation","Wetland delineation if applicable","Identify exotic and invasive plant species","Coastal Zone: analyze alternatives to avoid ESHA impacts","Restoration and Monitoring Plan may be required","County may directly hire biologist at applicant's expense"]},{"number":"38","name":"Archaeology Report","description":"Prepared by state-qualified professional archaeologist","requirements":["Based on field survey and records search","Evidence of archaeological resources on or near site","Evaluate project's potential impacts","Mitigation measures if significant impacts found","Coastal Zone: use archaeologist recommended by Sacred Site Protection Committee","Subject to peer review at Director's discretion"]},{"number":"39","name":"Historical Study","description":"Prepared by qualified architectural historian","requirements":["Assess if site or structures are significant historical resources","Evaluate based on Countywide Plan policies","Use Local Coastal Plan Historic Review Checklist in Coastal Zone","Preservation measures if resource is significant","Subject to peer review at Director's discretion"]},{"number":"40","name":"Traffic/Parking Study","description":"2 copies evaluating traffic and parking impacts","trafficStudy":["Existing levels of service at intersections","Proposed level of service including project","Existing peak PM trips","PM peak trips added by project","Cumulative traffic conditions"],"parkingStudy":["Existing parking demand analysis","Project-created parking demand","Sight distance analysis (may be required)","Turning radius analysis (may be required)"]},{"number":"41","name":"Affordable Housing Plan","description":"Required information for inclusionary units","requirements":["Number, affordability level, unit type, tenure, bedrooms","Location, size, and design of inclusionary units","Construction schedule and phasing relative to market-rate units","Income certification and screening provisions","Resale control mechanisms","Ongoing monitoring and administration","Incentive requests per Chapter 22.24 with financial analysis","Financial analysis subject to peer review at applicant's expense","Additional information as required by Director"]},{"number":"42","name":"Construction Program","description":"Components related to development activities","requirements":["Site Plan: Grading/construction areas, soil stockpiles, laydown areas, worker parking, temporary facilities, power generators","Dust Reduction: Consistent with Bay Air Quality Management District's basic control measures","Erosion Control: As required by Department of Public Works","Traffic Control Plan: As required by Department of Public Works","Tree Protection Fencing: Location and design of environmental safeguards","Construction Phasing: Timing for grading, vegetation removal, noise-making work, interior work, utilities installation"]},{"number":"43","name":"Approved Master Plan","description":"Approved Master Plan for property must be submitted with relevant information shown on plans"}]}],"footer":{"organization":"Marin County Planning Division","accessibility":"All County publications are available in alternative formats (Braille, Large Print, or CD), upon request.","contact":{"voice":"(415) 473-4381","tdd":"473-3232"}}};
+
+        function renderPage(data) {
+            const app = document.getElementById('app');
+            
+            // Build navigation
+            let navHTML = `
+                <nav>
+                    <h3>Quick Navigation</h3>
+                    <ul>
+                        ${data.sections.map(section => 
+                            `<li><a href="#${section.id}">${section.name}</a></li>`
+                        ).join('')}
+                    </ul>
+                </nav>
+            `;
+            
+            // Build sections
+            let sectionsHTML = data.sections.map(section => {
+                let itemsHTML = section.items.map(item => {
+                    let contentHTML = `
+                        <div class="item">
+                            <h3>${item.number}. ${item.name}</h3>
+                            <div class="item-description">${item.description}</div>
+                    `;
+                    
+                    // Handle elements (for Site Plan)
+                    if (item.elements) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Required Elements:</h4>
+                                ${item.elements.map(el => `
+                                    <div class="element-item">
+                                        <span class="element-label">${el.label}:</span> ${el.description}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle special requirements
+                    if (item.specialRequirements) {
+                        contentHTML += `
+                            <div class="special-req">
+                                <h5>Special Requirements for Specific Applications:</h5>
+                                ${item.specialRequirements.map(req => `
+                                    <div class="special-req-item">
+                                        <span class="special-req-type">${req.type}:</span> ${req.description}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle requirements
+                    if (item.requirements) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <ul>
+                                    ${item.requirements.map(req => `<li>${req}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle sheet requirements (Project Information)
+                    if (item.sheetRequirements) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Sheet Requirements:</h4>
+                                <ul>
+                                    <li><strong>Max Size:</strong> ${item.sheetRequirements.maxSize}</li>
+                                    <li><strong>North Arrow:</strong> ${item.sheetRequirements.northArrow}</li>
+                                    <li><strong>Scale Reference:</strong> ${item.sheetRequirements.scaleReference}</li>
+                                    <li><strong>Contact Data:</strong> ${item.sheetRequirements.contactData}</li>
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle project data
+                    if (item.projectData) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Project Data to Include:</h4>
+                                <ul>
+                                    ${item.projectData.map(data => `<li>${data}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle criteria (Master Plan)
+                    if (item.criteria) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Criteria to Include:</h4>
+                                <ul>
+                                    ${item.criteria.map(c => `<li>${c}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle review procedures
+                    if (item.reviewProcedures) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Review Procedures:</h4>
+                                <ul>
+                                    ${item.reviewProcedures.map(p => `<li>${p}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle partA and partB (Geotechnical)
+                    if (item.partA) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Part A - ${item.partA.title}:</h4>
+                                <ul>
+                                    ${item.partA.items.map(i => `<li>${i}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    if (item.partB) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Part B - ${item.partB.title}:</h4>
+                                <ul>
+                                    ${item.partB.items.map(i => `<li>${i}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    // Handle traffic and parking studies
+                    if (item.trafficStudy) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Traffic Study Components:</h4>
+                                <ul>
+                                    ${item.trafficStudy.map(t => `<li>${t}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    if (item.parkingStudy) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Parking Study Components:</h4>
+                                <ul>
+                                    ${item.parkingStudy.map(p => `<li>${p}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+                    
+                    contentHTML += `</div>`;
+                    return contentHTML;
+                }).join('');
+                
+                return `
+                    <section id="${section.id}" class="section">
+                        <h2>${section.name}</h2>
+                        <p class="section-description">${section.description}</p>
+                        ${itemsHTML}
+                    </section>
+                `;
+            }).join('');
+            
+            // Build footer
+            let footerHTML = `
+                <footer>
+                    <p><strong>${data.footer.organization}</strong></p>
+                    <p>${data.version} - ${data.date}</p>
+                    <p>${data.footer.accessibility}</p>
+                    <p>Requests for accommodations: ${data.footer.contact.voice} (Voice) | ${data.footer.contact.tdd} (TDD/TTY)</p>
+                </footer>
+            `;
+            
+            // Assemble page
+            app.innerHTML = `
+                <header>
+                    <h1>${data.title}</h1>
+                    <p>${data.version} (${data.date})</p>
+                </header>
+                <div class="container">
+                    ${navHTML}
+                    ${sectionsHTML}
+                    ${footerHTML}
+                </div>
+            `;
+        }
+        
+        // Render the page
+        renderPage(checklistData);
+    </script>
+</body>
+</html>
