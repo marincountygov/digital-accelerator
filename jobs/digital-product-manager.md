@@ -1,11 +1,11 @@
 # Digital Product Manager
 
-Location: San Rafael, CA (Frank Lloyd Wright Civic Center)
-Schedule: Majority in-person (e.g., 3 days in person 2 days remote)
+- Location: San Rafael, CA (Frank Lloyd Wright Civic Center)
+- Schedule: Majority in-person (e.g., 3 days in person 2 days remote)
 
 ## About Marin County
 
-Marin County serves over 260,000 residents across 11 cities, towns, and unincorporated areas of the Bay Area. With a $900 million operating budget and 2,400 full-time staff, we deliver essential services including health and human services, housing, environmental protection, public safety, emergency response, and digital innovation.
+[Marin County](https://www.marincounty.gov) serves over 260,000 residents across 11 cities, towns, and unincorporated areas of the Bay Area. With a $900 million operating budget and 2,400 full-time staff, we deliver essential services including health and human services, housing, environmental protection, public safety, emergency response, and digital innovation.
 
 We are widely recognized for leadership in sustainability, equity, and digital transformation. Marin County is currently undergoing the most significant organizational restructuring in 70 years—shifting to a centralized County Executive model under the unified “One Marin” vision.
 
@@ -19,19 +19,19 @@ This is a key leadership role that will require cross-department collaboration, 
 
 ## Primary Areas of Responsibility
 
-1. MarinCounty.gov
+### MarinCounty.gov
 
 - Oversee continuous improvement of the County’s newly modernized .gov website on Drupal.
 - Enhance design, content, accessibility, and wayfinding.
 - Support and enable content managers across County departments to independently own and maintain their sites.
 
-2. FixItMarin (County’s 311 App)
+### FixItMarin (County’s 311 App)
 
 - Lead the launch and scaling of FixItMarin in 2025
 - Drive adoption and iteration of this marquee product, ensuring it delivers a seamless experience for constituents reporting service requests.
 - Partner with internal service teams to ensure responsiveness, transparency, and continuous improvement.
 
-3. Enablement & Culture
+### Enablement & Culture
 
 - Champion adoption of product management principles and a true ownership mindset across County agencies and IT teams.
 - Embed human-centered design and service optimization into daily practices.
