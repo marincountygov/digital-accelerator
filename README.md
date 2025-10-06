@@ -1,2 +1,2 @@
-# digital-accelerator
-Marin County Digital Accelerator
+# Marin County Digital Accelerator
+
