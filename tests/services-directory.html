@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marin County Services Directory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .sidebar {
+            flex: 0 0 300px;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .search-filter {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .search-filter h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.2em;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        
+        .filter-section h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            padding: 10px 16px;
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-btn:hover {
+            background: #e8f4f8;
+            border-color: #3498db;
+        }
+        
+        .filter-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .filter-count {
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+        
+        .content-area {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .stats {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stats-text {
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .stats-number {
+            font-size: 2em;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .section {
+            background: white;
+            margin-bottom: 20px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .service-count {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .service-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        
+        .service-item:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+        }
+        
+        .service-name {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .service-description {
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .service-source {
+            color: #3498db;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+        
+        .service-source::before {
+            content: "📄 ";
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.2em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            margin-top: 40px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 1;
+                width: 100%;
+                position: static;
+            }
+            
+            .filter-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                flex: 1 1 auto;
+                min-width: 150px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .main-container {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .sidebar {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const servicesData = [{"Category":"Environmental Health Services","Service":"Sharps Disposal Program","Service description":"Safe disposal of needles and medical sharps","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Solid Waste Permit","Service description":"Get permit for solid waste handling","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Body Art Program","Service description":"Forms for tattoo and piercing businesses","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Food Facility Plan","Service description":"Review construction plans for food businesses","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Report Unsafe Conditions","Service description":"Submit complaint about health or safety issues","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Temporary Food Facilities","Service description":"Permit for short-term food service operations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Farmers Market Vendor","Service description":"Sell pre-packaged food at farmers markets","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Mobile Food Facilities","Service description":"Operate a motorized food business","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Public Pool Plan","Service description":"Submit plans for public pool construction","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Housing Complaint Submission","Service description":"Report rental housing health or safety problems","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Septic System Permit","Service description":"Apply for septic system installation permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Compact Mobile Food","Service description":"Small mobile food operation permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Food Health Permit","Service description":"Apply for food business health permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Medical Waste Business","Service description":"Help businesses handle medical waste properly","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Graywater Permit Applications","Service description":"Permit for septic and graywater systems","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Food Handler Card","Service description":"Get California food safety handler card","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Cottage Food Operations","Service description":"Sell homemade food from your home","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Alternative Septic System","Service description":"Regulations for alternative septic systems","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Food Manager Certification","Service description":"Get California food manager certification","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Private Water Wells","Service description":"Information about private water well systems","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Domestic Water Supply","Service description":"Apply to operate domestic water supply","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Catering Permit","Service description":"Annual permit for caterers and hosts","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Well Drilling Permit","Service description":"Get permit to drill a well","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Food Equipment Plan","Service description":"Review plans for new food equipment","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Ownership Change Application","Service description":"Transfer food business to new owner","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Pool Consultation Request","Service description":"Get help with pool construction plans","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Medical Waste Application","Service description":"Apply for medical waste permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Well Destruction Application","Service description":"Apply to properly close a well","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Rental Housing Permit","Service description":"Health permit for multi-unit rental housing","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Report Foodborne Illness","Service description":"Report suspected food poisoning or illness","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Septic Inspection Form","Service description":"Form for residential septic system inspection","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Pool Inspection Request","Service description":"Request inspection during pool construction","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Pool Plan Review","Service description":"Review construction plans for pools and spas","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental Health Services","Service":"Graywater Notification Form","Service description":"Notify county of graywater system construction","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Building and Safety","Service":"Building Permit Application","Service description":"Apply for building construction permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Building and Safety","Service":"Complicated Permit Help","Service description":"Get help with complex permit applications","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Building and Safety","Service":"Online Permitting","Service description":"Apply for building permits online","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Building and Safety","Service":"Schedule Building Inspection","Service description":"Book an inspection for building work","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Building and Safety","Service":"Permit Ombudsperson","Service description":"Get help navigating the permit process","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Short Term Rental","Service description":"Apply for short-term rental license","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Agricultural Rental Exemption","Service description":"Exempt agricultural short-term rental form","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Planning Information Request","Service description":"Get help revising a planning request","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"General Planning Permit","Service description":"Apply for general planning permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Coastal Permit Exclusion","Service description":"Apply for coastal permit exclusion","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Planning Permit Appeal","Service description":"Appeal a planning permit decision","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Property Status Determination","Service description":"Check if property structures follow regulations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"ABC License Application","Service description":"Apply for alcohol license convenience determination","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Property Sale Inspection","Service description":"Voluntary inspection for property sales","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Address Change Request","Service description":"Apply for new address or street name","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Williamson Act Application","Service description":"Apply for agricultural land conservation contract","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Telecommunications Facilities Application","Service description":"Apply for telecommunications facilities permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Planning Division Help","Service description":"Get assistance from planning division","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Code Compliance Complaint","Service description":"File complaint about zoning or construction violations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning","Service":"Rental Complaints","Service description":"Report short-term rental violations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Housing and Grants","Service":"ADU Fee Waiver","Service description":"Apply for accessory dwelling unit fee waiver","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Housing and Grants","Service":"Affordable Housing Funding","Service description":"Apply for affordable housing construction funding","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Housing and Grants","Service":"West Marin Housing","Service description":"Apply for West Marin community housing funding","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Housing and Grants","Service":"Mandatory Mediation Program","Service description":"Mediate disputes between landlords and tenants","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Low Carbon Concrete","Service description":"Compliance forms for low carbon concrete","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Concrete Mix Design","Service description":"Pre-qualify your concrete mix design","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Green Building Compliance","Service description":"Requirements for new residential construction","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Residential Alterations Small","Service description":"Green building for alterations under 750 sq ft","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Residential Alterations Large","Service description":"Green building for alterations 750 sq ft plus","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Multifamily Alterations Small","Service description":"Green building for multifamily under 750 sq ft","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Multifamily Alterations Large","Service description":"Green building for multifamily 750 sq ft plus","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Commercial New Construction","Service description":"Green building compliance for new commercial buildings","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Commercial Alterations","Service description":"Green building for commercial additions and alterations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Electrify Marin Rebates","Service description":"Apply for home electrification rebates","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Sustainability","Service":"Energy Efficiency Programs","Service description":"Multifamily energy efficiency support programs","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accessibility Services","Service":"ADA Accommodation Request","Service description":"Request reasonable ADA accommodations for events","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Contractors and Vendors","Service":"Qualified Bidders List","Service description":"Apply to county's qualified bidders list","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental and Waste","Service":"Recycling Exemption Request","Service description":"Request exemption from mandatory recycling practices","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental and Waste","Service":"Organic Waste Violation","Service description":"Report mandatory organic waste disposal violations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Environmental and Waste","Service":"CUPA File Review","Service description":"Request environmental compliance review for business","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Encroachment Permit","Service description":"Permit for work in public right-of-way","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Permit Extension Request","Service description":"Request extension or revision of encroachment permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Film Encroachment Permit","Service description":"Permit for filming in public areas","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Film Permit Change","Service description":"Change request for film encroachment permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Recorded Encroachment Permit","Service description":"Permanently recorded encroachment permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Event Encroachment Permit","Service description":"Permit for events in public spaces","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Transportation Permits","Service":"Trip Transportation Permit","Service description":"Single trip permit for oversize vehicles","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Transportation Permits","Service":"Trip Permit Change","Service description":"Change request for trip transportation permit","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Transportation Permits","Service":"Annual Transportation Permit","Service description":"Annual permit for oversize vehicles","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Transportation Permits","Service":"Tour Bus Permit","Service description":"Special permit for large vehicles and buses","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Gnoss Field Airport","Service":"Aircraft Storage Permit","Service description":"Form to store aircraft at airport","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Land Surveying","Service":"Corner Record Submittal","Service description":"Document property boundary markers for filing","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Land Surveying","Service":"Lot Line Adjustment","Service description":"Approve and record lot line adjustments","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Land Surveying","Service":"Subdivision Map Submittal","Service description":"Submit map to split or combine lots","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Land Surveying","Service":"SB9 Division Map","Service description":"Submit map to split single-family lot","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Grading Permit","Service description":"Permit for land grading work","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Creek Permit","Service description":"Permit for work near creeks and waterways","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Services","Service":"Dam Permit","Service description":"Permit to build, modify, or remove dams","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Reporting","Service":"Report Road Issue","Service description":"Report problems with county roads","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Flood and Water","Service":"Drainage Assistance Program","Service description":"Get help with property drainage issues","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning and Administration","Service":"Nutrition Wellness Program","Service description":"Access nutrition and wellness resources","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Planning and Administration","Service":"Volunteer Program","Service description":"Get help finding volunteer placement opportunities","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"BRIDGE Program","Service description":"Recovery services for adults with mental illness","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Odyssey Program","Service description":"Services for adults with mental health homelessness","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"IMPACT Program","Service description":"Mental health recovery and self-sufficiency support","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Resource Center","Service description":"Mental health drop-in center for support","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Mobile Crisis Team","Service description":"Crisis response for mental health emergencies","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Youth Family Services","Service description":"Mental health services for youth with Medi-Cal","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"First Episode Psychosis","Service description":"Services for youth experiencing psychosis symptoms","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Youth Partnership","Service description":"Services for young people transitioning to adulthood","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Assisted Outpatient Treatment","Service description":"Treatment for individuals declining voluntary mental health","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"CARE Act Program","Service description":"Support for individuals with serious mental illness","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Justice-Involved Behavioral Health","Service description":"Support transitioning from incarceration to community","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"HOPE Program","Service description":"Case management for older adults","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Behavioral Health","Service":"Suicide Prevention","Service description":"Marin County suicide prevention resources","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Tuberculosis Reporting","Service description":"Mandatory reporting of tuberculosis cases","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Disease Reporting","Service description":"Confidential reporting of communicable diseases","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"DMV Medical Reporting","Service description":"Report conditions affecting safe driving ability","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Animal Disease Reporting","Service description":"Confidential reporting of animal diseases","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Medical Volunteer Programs","Service description":"Join Marin County medical volunteer programs","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Secondhand Smoke Complaint","Service description":"Report secondhand smoke exposure issues","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"California Children Services","Service description":"Financial help for children's medical treatment","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Healthy Families Visiting","Service description":"Home visiting program for new parents","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Birth Death Certificates","Service description":"Request birth or death certificates","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Health","Service":"Medical Marijuana Card","Service description":"Apply for medical marijuana ID card","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Social Services","Service":"Child Abuse Hotline","Service description":"Report suspected child abuse or neglect","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Social Services","Service":"Fost-Adopt Orientation","Service description":"Foster care and adoption program orientation","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Social Services","Service":"CalWORKs Employment","Service description":"Welfare to work employment services","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Social Services","Service":"General Relief","Service description":"Cash aid for individuals with no money","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Social Services","Service":"CalFresh Employment Training","Service description":"Employment and training for CalFresh recipients","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Aging and Adult Services","Service":"SSI Advocacy","Service description":"Help filing disability benefit claims","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Aging and Adult Services","Service":"CAPI","Service description":"Cash assistance for immigrants","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Aging and Adult Services","Service":"Adult Protective Services","Service description":"Protection services for vulnerable adults","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Aging and Adult Services","Service":"In-Home Supportive Services","Service description":"Help with daily activities at home","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Aging and Adult Services","Service":"Nutrition Services","Service description":"Meal programs for older adults","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Aging and Adult Services","Service":"Ombudsman Program","Service description":"Advocate for long-term care facility residents","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Assistance","Service":"County Medical Services","Service description":"Medical coverage for eligible low-income residents","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Assistance","Service":"Medi-Cal","Service description":"Apply for California health coverage","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Assistance","Service":"CalWORKs","Service description":"Cash aid and support for families","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Assistance","Service":"CalFresh SNAP","Service description":"Food assistance for eligible households","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Veterans Services","Service":"Veterans Services","Service description":"Help veterans obtain federal benefits","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Homelessness","Service":"Permanent Supportive Housing","Service description":"Long-term housing for homeless individuals","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Homelessness","Service":"Rapid Rehousing","Service description":"Short-term rental assistance for homeless people","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Property Tax Payments","Service description":"Pay property taxes to county","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Tax Exemptions","Service description":"Apply for property tax exemptions","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Assessment Appeals","Service description":"Appeal your property tax assessment","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Supplemental Tax Assessments","Service description":"Information about supplemental property tax bills","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Business Property Tax","Service description":"Pay unsecured business property tax","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Tax Postponement Program","Service description":"Postpone property tax payments if eligible","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Business License","Service description":"Apply for business license","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"TOT Registration","Service description":"Register new lodging for occupancy tax","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"TOT Online Return","Service description":"File transient occupancy tax return online","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"TOT Transfer Operations","Service description":"Notify of lodging business sale or closure","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Parcel Tax Enrollment","Service description":"Enroll in parcel tax administration program","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Parcel Tax Modification","Service description":"Modify parcel tax charges","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Property Tax Division","Service":"Parcel Tax Certification","Service description":"Annual certification for parcel tax","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accounting","Service":"Request Public Record","Service description":"Request access to county public records","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accounting","Service":"Participatory Budgeting","Service description":"Vote on how county funds are spent","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accounts Payable","Service":"Register as Vendor","Service description":"Register to do business with county","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accounts Payable","Service":"Update Vendor Information","Service description":"Update your vendor account information","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accounts Payable","Service":"Request Payment","Service description":"Request payment from the county","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accounts Payable","Service":"Request 1099 Copy","Service description":"Get copy of 1099 tax form","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Accounts Payable","Service":"Replacement Check","Service description":"Get replacement check for vendor services","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Administrator","Service":"Public Administrator Referral","Service description":"Submit referral to public administrator","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Administrator","Service":"Administrator Internship","Service description":"Apply for public administrator internship","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Agriculture","Service":"Ag Pass Card","Service description":"Get agricultural pass ID card","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Agriculture","Service":"Livestock Protection","Service description":"Enroll in livestock protection program","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Agriculture","Service":"Organic Certification","Service description":"Certification for organic crop growers","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Agriculture","Service":"Nursery License","Service description":"Apply for license to sell plants","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Agriculture","Service":"Vineyard Erosion Control","Service description":"Notify county of vineyard planting activity","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Weights and Measures","Service":"Business Registration","Service description":"Register new business with weights department","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"District Attorney","Service":"Real Estate Fraud","Service description":"Report real estate fraud complaint","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"District Attorney","Service":"Consumer Complaint","Service description":"File consumer protection complaint","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"District Attorney","Service":"Victim Witness Assistance","Service description":"Support services for crime victims","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"District Attorney","Service":"Consumer Mediation","Service description":"Mediation for consumer and landlord disputes","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"Clean Slate Services","Service description":"Help expunge criminal records","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"Immigration Services","Service description":"Legal help with immigration matters","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"Warrant Support","Service description":"Help with warrant if no lawyer","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"Criminal Defense","Service description":"Free criminal defense legal services","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"DMV License Support","Service description":"Help with DMV and license issues","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"Racial Justice Act","Service description":"Support challenging racially biased convictions","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"STAR Program","Service description":"Support and treatment after release program","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"CARE Court","Service description":"Mental health treatment court program","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Public Defender","Service":"Internship Program","Service description":"Apply for public defender internship","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Recorder's Office","Service":"View Recorded Map","Service description":"View or request copy of map","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Public Marriage License","Service description":"Apply for public marriage license","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Confidential Marriage License","Service description":"Apply for confidential marriage license","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Civic Center Wedding","Service description":"Get married at the Civic Center","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Wedding Deputization","Service description":"Get deputized to perform a wedding","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Public Marriage Certificate","Service description":"Get copy of public marriage certificate","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Confidential Marriage Certificate","Service description":"Get copy of confidential marriage certificate","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Domestic Partnership","Service description":"Register a domestic partnership","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Recorder's Office","Service":"Fictitious Business Name","Service description":"File a fictitious business name","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Homeowners' Exemption","Service description":"Apply for homeowner's tax exemption","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Base Year Transfers","Service description":"Transfer home's assessed value to new home","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Intergenerational Transfers","Service description":"Reduced property assessment after owner's death","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Book Appointments","Service description":"Schedule appointment with assessor's office","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"File CEQA Documents","Service description":"File environmental quality act documents","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Seismic Safety Exclusion","Service description":"Exclude seismic improvements from property tax","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Solar Exclusion","Service description":"Exclude solar systems from property tax","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Organization Exemptions","Service description":"Tax exemptions for qualifying organizations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Veterans' Exemption","Service description":"Property tax exemption for veterans","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Disaster Tax Relief","Service description":"Property tax relief after disaster","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Assessor's Office","Service":"Decline in Value","Service description":"Property tax relief for value decline","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Notary Public","Service description":"File or take notary public oath","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Process Server Registration","Service description":"Register as a process server","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Legal Documents Assistant","Service description":"Register as legal documents assistant","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Legal Assistant Corporation","Service description":"Legal document assistant corporation registration","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Unlawful Detainer Assistant","Service description":"Register as unlawful detainer assistant","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Detainer Assistant Corporation","Service description":"Unlawful detainer assistant corporation registration","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Professional Photocopier","Service description":"Register as professional photocopier","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Public Agencies Registry","Service description":"Register with public agencies registry","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Translation Certificate","Service description":"Get translation certificate","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Officer Verification","Service description":"Health officer and notary verification","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Aliveness Certificate","Service description":"Get certificate of aliveness","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Clerk's Office","Service":"Surety Insurer Certificate","Service description":"Certificate for admitted surety insurers","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Civil Grand Jury","Service":"Apply Grand Jury","Service description":"Apply to serve on jury","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Civil Grand Jury","Service":"Request Investigation","Service description":"Request a grand jury investigation","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Probation","Service":"Probation Payment","Service description":"Make payment to probation department","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Probation","Service":"Custody Alternatives","Service description":"Pre-application for custody alternatives program","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Probation","Service":"Seal Juvenile Records","Service description":"Seal your juvenile criminal records","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Probation","Service":"Victim Restitution","Service description":"Make payment for victim restitution","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Human Resources","Service":"Internships","Service description":"Apply for paid or unpaid internships","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Child Support Services","Service":"Enroll Child Support","Service description":"Enroll in child support services","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Child Support Services","Service":"Child Support Payment","Service description":"Make a child support payment","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Cultural Services","Service":"Facilities Rental","Service description":"Rent Marin Center facilities","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Cultural Services","Service":"Wright School Tour","Service description":"Schedule school tour of Wright building","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Cultural Services","Service":"Wright Tour Tickets","Service description":"Buy Frank Lloyd Wright tour tickets","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Cultural Services","Service":"Cultural Services Volunteer","Service description":"Volunteer with cultural services department","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Elections","Service":"Voter Registration","Service description":"Register to vote in elections","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Elections","Service":"Election Worker","Service description":"Apply to work at elections","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Elections","Service":"Ballot Representative","Service description":"Authorize representative for ballot pickup","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Elections","Service":"Candidate Application","Service description":"Apply as candidate for election","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Fire Department","Service":"Explorer Program","Service description":"Youth program with fire department","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Fire Department","Service":"Lookout Volunteer","Service description":"Volunteer as fire lookout during season","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Fire Department","Service":"Measure W Committee","Service description":"Join tax oversight committee","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Fire Department","Service":"School Visit Request","Service description":"Request fire department visit to school","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Fire Department","Service":"FIRE Foundry Program","Service description":"Training for underrepresented individuals in fire","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Board of Supervisors","Service":"Board Meeting Comment","Service description":"Make comment at board meeting","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Board of Supervisors","Service":"File County Claim","Service description":"File a claim against county","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"County Executive","Service":"Nonprofit Funding","Service description":"Funding opportunities for nonprofit organizations","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"Employment Training Programs","Service description":"County employment and training programs","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"CareerPoint North Bay","Service description":"Career services and job search help","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"Marin City CDC","Service description":"Community development corporation services","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"Community Action Marin","Service description":"Community services and support","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"Canal Alliance","Service description":"Services for immigrant and Latino communities","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"Career Technical Education","Service description":"Career education for high school students","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"Microbusiness Support Clinics","Service description":"Support clinics for small businesses","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Economic Vitality","Service":"Business Advising","Service description":"One on one business advising","Data source":"20250828_Service Inventory Schema.pdf"},{"Category":"Parks","Service":"Parks Volunteer","Service description":"Volunteer with Marin County Parks","Data source":"20250828_Service Inventory Schema.pdf"}];
+
+        function renderPage(data) {
+            const app = document.getElementById('app');
+            
+            // Get unique categories
+            const categories = [...new Set(data.map(item => item.Category))].sort();
+            
+            // Count services per category
+            const categoryCounts = {};
+            categories.forEach(cat => {
+                categoryCounts[cat] = data.filter(item => item.Category === cat).length;
+            });
+            
+            let currentFilter = 'all';
+            let searchTerm = '';
+            
+            function render() {
+                // Filter data based on current filter and search
+                let filteredData = data;
+                
+                if (currentFilter !== 'all') {
+                    filteredData = filteredData.filter(item => item.Category === currentFilter);
+                }
+                
+                if (searchTerm) {
+                    const term = searchTerm.toLowerCase();
+                    filteredData = filteredData.filter(item => 
+                        item.Service.toLowerCase().includes(term) ||
+                        item['Service description'].toLowerCase().includes(term) ||
+                        item.Category.toLowerCase().includes(term)
+                    );
+                }
+                
+                // Group filtered data by category
+                const filteredByCategory = {};
+                filteredData.forEach(item => {
+                    if (!filteredByCategory[item.Category]) {
+                        filteredByCategory[item.Category] = [];
+                    }
+                    filteredByCategory[item.Category].push(item);
+                });
+                
+                // Build sidebar with search and filters
+                const sidebarHTML = `
+                    <div class="sidebar">
+                        <div class="search-filter">
+                            <h3>Search Services</h3>
+                            <input 
+                                type="text" 
+                                class="search-box" 
+                                placeholder="Search by name or description..."
+                                value="${searchTerm}"
+                                id="searchBox"
+                            />
+                            <div class="filter-section">
+                                <h4>Filter by Category</h4>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" data-filter="all">
+                                        <span>All Services</span>
+                                        <span class="filter-count">${data.length}</span>
+                                    </button>
+                                    ${categories.map(cat => `
+                                        <button class="filter-btn ${currentFilter === cat ? 'active' : ''}" data-filter="${cat}">
+                                            <span>${cat}</span>
+                                            <span class="filter-count">${categoryCounts[cat]}</span>
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Build stats
+                const statsHTML = `
+                    <div class="stats">
+                        <div class="stats-text">Showing</div>
+                        <div class="stats-number">${filteredData.length}</div>
+                        <div class="stats-text">of ${data.length} services</div>
+                    </div>
+                `;
+                
+                // Build sections
+                let sectionsHTML = '';
+                if (Object.keys(filteredByCategory).length === 0) {
+                    sectionsHTML = `
+                        <div class="section">
+                            <div class="no-results">
+                                No services found matching your search criteria.
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    sectionsHTML = Object.keys(filteredByCategory).sort().map(category => {
+                        const services = filteredByCategory[category];
+                        return `
+                            <section class="section">
+                                <h2>${category}</h2>
+                                <div class="service-count">${services.length} service${services.length !== 1 ? 's' : ''}</div>
+                                ${services.map(service => `
+                                    <a href="${service['Data source']}" class="service-item" target="_blank">
+                                        <div class="service-name">${service.Service}</div>
+                                        <div class="service-description">${service['Service description']}</div>
+                                        <div class="service-source">${service['Data source']}</div>
+                                    </a>
+                                `).join('')}
+                            </section>
+                        `;
+                    }).join('');
+                }
+                
+                // Build content area
+                const contentHTML = `
+                    <div class="content-area">
+                        ${statsHTML}
+                        ${sectionsHTML}
+                        <footer>
+                            <p><strong>Marin County Services Directory</strong></p>
+                            <p>Version 1.0 (October 2025)</p>
+                            <p>All County publications are available in alternative formats (Braille, Large Print, or CD), upon request.</p>
+                            <p>Contact: (415) 473-4381 (Voice) | 473-3232 (TDD/TTY)</p>
+                        </footer>
+                    </div>
+                `;
+                
+                // Assemble page
+                app.innerHTML = `
+                    <header>
+                        <h1>Marin County Services Directory</h1>
+                        <p>Comprehensive guide to county services and programs</p>
+                    </header>
+                    <div class="main-container">
+                        ${sidebarHTML}
+                        ${contentHTML}
+                    </div>
+                `;
+                
+                // Add event listeners
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const button = e.target.closest('.filter-btn');
+                        currentFilter = button.dataset.filter;
+                        render();
+                    });
+                });
+                
+                const searchBox = document.getElementById('searchBox');
+                if (searchBox) {
+                    searchBox.addEventListener('input', (e) => {
+                        searchTerm = e.target.value;
+                        render();
+                    });
+                }
+            }
+            
+            render();
+        }
+        
+        // Render the page
+        renderPage(servicesData);
+    </script>
+</body>
+</html>
