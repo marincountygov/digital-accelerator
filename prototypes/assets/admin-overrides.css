@@ -1,0 +1,121 @@
+/*
+  Overrides Claro layout for node form.
+  @see https://www.drupal.org/project/drupal/issues/3184667
+*/
+
+[data-cke-tooltip-text="Material Icons"] {
+  display: none !important;
+}
+
+.views-exposed-form__item.views-exposed-form__item {
+  min-width: 150px !important;
+}
+
+.paragraphs-add-wrapper {
+  display: block !important;
+}
+
+.ck-balloon-panel {
+  max-width: 400px;
+}
+
+.linkit-result-line--group,
+.linkit-result-line {
+  word-wrap: normal;
+  white-space: normal;
+}
+
+.node-form .layout-form {
+  display: block;
+}
+
+.node-form .layout-region--main {
+  margin: 0;
+  width: 100%;
+}
+
+.node-form .layout-region--secondary {
+  margin-top: 0;
+}
+
+.node-form .field-group-tab {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 61rem) {
+  .layout-region--node-main,
+  .layout-region--node-footer {
+    width: 100% !important;
+  }
+
+  .node-form .layout-region--main, .node-form .layout-region--footer {
+    width: 100% !important;
+  }
+
+  .layout-region--node-secondary {
+    margin-top: var(--vertical-tabs-margin-vertical) !important;
+  }
+
+  .layout-node-form {
+    grid-template-columns: unset !important;
+  }
+
+  .vertical-tabs__menu {
+    width: 15rem !important;
+  }
+
+  .vertical-tabs .vertical-tabs__panes {
+    margin-left: 15rem !important;
+  }
+
+  .paragraphs-subform {
+    max-width: 90%;
+  }
+}
+
+@media screen and (min-width: 93.75rem) {
+  .layout-node-form {
+    grid-template-columns: 3fr minmax(22.5rem, 1fr) !important;
+  }
+
+  .node-form .layout-form {
+    display: grid;
+  }
+}
+
+/* Select2 */
+
+.select2-container--claro .select2-selection--multiple {
+  height: 48px;
+  min-width: 250px !important;
+}
+
+.select2-container--claro .select2-selection--multiple .select2-search--inline {
+  padding: 0.25rem 0 0 !important; 
+}
+
+.select2-container--claro .select2-selection--multiple .select2-search--inline .select2-search__field {
+  min-width: 68px !important;
+}
+
+.select2-container--claro .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+  width: 0.5rem !important;
+  margin-left: 0.5rem;
+  overflow: hidden;
+}
+
+.paragraph--type--pdf-lister .field {
+  margin-bottom: 1rem !important;
+}
+
+div.js-filter-wrapper:has(.filter-guidelines__item--plain-text) {
+  display: none;
+}
+
+.marin__help-text .fieldset__description,
+.form-item__description,
+.claro-details__description,
+div[id *= "media-library-wrapper--description"] {
+  font-size: 1rem !important;
+}

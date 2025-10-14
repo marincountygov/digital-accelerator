@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marin County Planning Application Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .main-content {
+            min-width: 0;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+        
+        nav h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        nav a {
+            display: block;
+            padding: 8px 12px;
+            background: transparent;
+            color: #3498db;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.9em;
+            border-left: 3px solid transparent;
+        }
+        
+        nav a:hover {
+            background: #f8f9fa;
+            border-left-color: #3498db;
+            padding-left: 15px;
+        }
+        
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .section-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .item {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        
+        .item h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .item-description {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .requirements {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        .requirements h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .requirements ul {
+            margin-left: 20px;
+        }
+        
+        .requirements li {
+            margin: 5px 0;
+        }
+        
+        .element-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+        
+        .element-label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .special-req {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .special-req h5 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        .special-req-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 3px;
+        }
+        
+        .special-req-type {
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .info-box {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .info-box h5 {
+            color: #0c5460;
+            margin-bottom: 8px;
+        }
+
+        .fee-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        .fee-label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .contact-card h5 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .contact-card p {
+            margin: 3px 0;
+            font-size: 0.95em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            margin-top: 40px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+
+            nav {
+                position: relative;
+                top: 0;
+            }
+
+            nav ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        const guideData = {
+            "title": "Marin County Planning Application Guide",
+            "version": "Version 4",
+            "sections": [
+                {
+                    "id": "first-steps",
+                    "name": "First Steps",
+                    "description": "Start your planning journey with these essential first steps.",
+                    "items": [
+                        {
+                            "name": "Defining Your Goals",
+                            "description": "The first step in seeing your project through is defining your goals up front. For a growing family this may mean adding another bedroom to their house, while to a business owner this may mean opening a new store.",
+                            "requirements": [
+                                "Clearly set forth what you hope to achieve",
+                                "Decide on your priorities in advance",
+                                "Be prepared to redefine goals as you learn more about applicable standards"
+                            ]
+                        },
+                        {
+                            "name": "Gathering Information",
+                            "description": "Collect essential information about your property and project requirements.",
+                            "requirements": [
+                                "Find the zoning for your property on the county website using your address or tax parcel number",
+                                "Look up past permits granted for projects on your property",
+                                "Review information sheets for basic development standards in your zoning district",
+                                "Visit the planning division's public service counter to discuss your project",
+                                "Request a Planning Information Packet with copies of previous permit decisions",
+                                "Check for previous permits that may place limitations on future projects"
+                            ]
+                        },
+                        {
+                            "name": "Choosing a Project Manager",
+                            "description": "For many smaller projects, a homeowner or business owner may be able to manage the application process themselves. However, there are benefits to having an experienced professional.",
+                            "requirements": [
+                                "Project manager must understand all requirements from various agencies",
+                                "Responsible for coordinating with subconsultants",
+                                "Serves as main contact and conduit of information",
+                                "Represents property owner at public forums",
+                                "Architects commonly act as both designer and applicant"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "preparing",
+                    "name": "Preparing Your Application",
+                    "description": "Important steps to take before submitting your planning application.",
+                    "items": [
+                        {
+                            "name": "Understanding Constraints",
+                            "description": "Review physical and regulatory constraints that may affect your design.",
+                            "requirements": [
+                                "Review Title Report for easements affecting the site",
+                                "Consider having a site survey prepared to locate boundaries and features",
+                                "Identify areas with promise for development (privacy, sunlight)",
+                                "Identify constrained areas (steep slopes, flooding areas, streams, wetlands, ridgelines)",
+                                "Hire experts to evaluate constraints (biologists for wetlands, geotechnical engineers for slopes)",
+                                "As a rule of thumb, avoid areas near streams, wetlands, and ridgelines"
+                            ]
+                        },
+                        {
+                            "name": "Community Outreach",
+                            "description": "Engaging with your neighbors and community before submitting your application.",
+                            "requirements": [
+                                "Talk to immediate neighbors about your project",
+                                "Contact property owners' associations or community groups with interest in your project",
+                                "Greater outreach needed for commercial or multi-family projects affecting broader community",
+                                "Consider holding your own meetings for dialogue with community",
+                                "Contact property owners' association about CC&Rs before applying",
+                                "Remember: The County does not enforce CC&Rs, but associations have legal right to enforce them"
+                            ]
+                        },
+                        {
+                            "name": "Using the Submittal Checklist",
+                            "description": "Your primary resource for putting a planning application together.",
+                            "requirements": [
+                                "Follow instructions in Planning Application Submittal Checklist carefully",
+                                "Missing information may seriously delay processing your application",
+                                "Submit application at Planning Division's public services counter",
+                                "Project applicant should personally come to counter rather than having materials delivered",
+                                "Consider requesting a Presubmittal Plan Review to catch problems early"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "planning-services",
+                    "name": "Applications for Planning Services",
+                    "description": "Services provided by the Planning Division to assist in preparing your application.",
+                    "items": [
+                        {
+                            "name": "Property Information Packet",
+                            "description": "A summary of a property's permit history including copies of all final decisions and exhibits for past planning applications.",
+                            "requirements": [
+                                "Includes basic planning information",
+                                "Includes aerial photo of the site",
+                                "Easier than doing the research yourself"
+                            ]
+                        },
+                        {
+                            "name": "Planning Consultation",
+                            "description": "Two hours of time spent by a planner to answer your questions.",
+                            "requirements": [
+                                "Planner identifies policy and regulatory documents that apply",
+                                "Checks County maps for background information",
+                                "Indicates whether environmental review is likely",
+                                "Suggests path of least resistance for your project",
+                                "Can help determine if design changes substantially conform to approved permit",
+                                "Consider applying for Property Information Packet at same time"
+                            ]
+                        },
+                        {
+                            "name": "Preapplication",
+                            "description": "In-depth service typically reserved for larger scale projects like subdivisions and multi-family developments.",
+                            "requirements": [
+                                "Requires full description and graphic representation of project",
+                                "Information sent to Department of Public Works and other requested organizations",
+                                "Provides written preliminary evaluation of your project",
+                                "Covers policies, regulations, application requirements, and environmental review",
+                                "Informs decisions about how to proceed"
+                            ]
+                        },
+                        {
+                            "name": "Presubmittal Plan Review",
+                            "description": "Cursory review of plans before official Planning Application is submitted.",
+                            "requirements": [
+                                "Submit one full-sized copy of complete plans",
+                                "Planner checks if plans have all basic submittal items necessary",
+                                "Can save time by catching problems early",
+                                "Helps avoid application rejection at counter"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "land-uses",
+                    "name": "Applications for Land Uses and Businesses",
+                    "description": "Planning permits related to business operations and property uses.",
+                    "items": [
+                        {
+                            "name": "Conditional Use Permit",
+                            "description": "Required for uses that may be conditionally permitted in your zoning district.",
+                            "requirements": [
+                                "Discretionary planning permit",
+                                "Requires public hearing before Deputy Zoning Administrator",
+                                "Public notice published in newspaper and sent to neighbors",
+                                "Planner prepares staff report with recommendation",
+                                "Applicant and public can provide testimony at hearing",
+                                "Decision may be appealed to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Master Use Permit",
+                            "description": "A type of Conditional Use Permit that governs multiple conditional uses on a single property.",
+                            "requirements": [
+                                "Same process as Conditional Use Permit",
+                                "Public hearing before Deputy Zoning Administrator",
+                                "Appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Temporary Use Permit",
+                            "description": "Allows short-term uses that may not meet normal standards due to temporary nature.",
+                            "requirements": [
+                                "Examples: holiday sales lots, temporary work trailers",
+                                "May be referred to other public agencies",
+                                "Public notice posted on site",
+                                "Administrative decision by planner",
+                                "Appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Use Permit Renewal",
+                            "description": "Ministerial permit to verify use continues to meet conditions of original permit.",
+                            "requirements": [
+                                "Required for vested permits with limited terms",
+                                "Not usually referred to other agencies",
+                                "No public notice provided",
+                                "Ministerial decision - not appealable"
+                            ]
+                        },
+                        {
+                            "name": "Accessory Dwelling Unit Permit",
+                            "description": "Allows second permanent dwelling accessory to primary dwelling (e.g., cottage, in-law unit).",
+                            "requirements": [
+                                "Only for units constructed after January 1, 2017",
+                                "No permit needed for older buildings",
+                                "May be referred to other agencies",
+                                "No public notice provided",
+                                "Ministerial decision - not appealable"
+                            ]
+                        },
+                        {
+                            "name": "Property Status Determination",
+                            "description": "Similar to voluntary resale inspection but covers only zoning compliance.",
+                            "requirements": [
+                                "Determines legal status of all buildings and land uses",
+                                "Confirms all buildings and uses are legally permitted",
+                                "Administrative decision - not appealable",
+                                "Warning: Illegal status information forwarded to Code Compliance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "property-mods",
+                    "name": "Applications for Property Modifications",
+                    "description": "Planning permits for subdivisions, lot line changes, and property configurations.",
+                    "items": [
+                        {
+                            "name": "Tentative Map",
+                            "description": "Required to create new lots or adjust lot lines of more than four lots. First step in subdivision approval process.",
+                            "requirements": [
+                                "Referred to other public agencies",
+                                "Most require environmental review (CEQA)",
+                                "Public hearing before Deputy Zoning Administrator",
+                                "Public notice in newspaper and to neighbors",
+                                "Appealable to Planning Commission",
+                                "Must be followed by Final Map or Parcel Map"
+                            ]
+                        },
+                        {
+                            "name": "Tentative Map Waiver",
+                            "description": "Used to modify requirements of previously approved subdivisions or subdivide for environmental preservation.",
+                            "requirements": [
+                                "May be referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision by planner",
+                                "Appealable to Planning Commission",
+                                "Requires Parcel Map or Final Map Plan Check to finalize"
+                            ]
+                        },
+                        {
+                            "name": "Certificate of Compliance",
+                            "description": "Determines whether a unit of real property is a legal lot of record.",
+                            "requirements": [
+                                "Ministerial permit",
+                                "Conditional certificate indicates conditions for legal status",
+                                "Not referred to other agencies",
+                                "No public notice",
+                                "Not appealable",
+                                "Legal determination recorded after decision"
+                            ]
+                        },
+                        {
+                            "name": "Lot Line Adjustment",
+                            "description": "Allows adjusting lot lines between 2-4 contiguous lots without creating more lots than originally existed.",
+                            "requirements": [
+                                "Must maintain minimum lot size, setbacks, and access",
+                                "May be referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision - appealable to Planning Commission",
+                                "County Surveyor must approve deeds and plat maps",
+                                "Tax Assessor updates Assessor's Parcel Maps"
+                            ]
+                        },
+                        {
+                            "name": "Merger",
+                            "description": "Consolidation of contiguous parcels in common ownership that are substandard with respect to current subdivision standards.",
+                            "requirements": [
+                                "May be County or owner initiated",
+                                "Owner names must be identical on all relevant deeds",
+                                "Only one primary structure allowed on final merged lot",
+                                "Public hearing required unless waiver signed",
+                                "Recorded with County Recorder's Office",
+                                "Apply to Tax Assessor for Assessor's Parcel combination"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "development",
+                    "name": "Applications for Development",
+                    "description": "Planning permits for construction projects and physical improvements.",
+                    "items": [
+                        {
+                            "name": "Design Review",
+                            "description": "Most common discretionary permit. Ensures development is attractive and appropriately located.",
+                            "requirements": [
+                                "May cover single lot or multiple contiguous lots",
+                                "May be referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision by planner",
+                                "Appealable to Planning Commission",
+                                "Typical timeline: 2-4 months from submission to decision"
+                            ]
+                        },
+                        {
+                            "name": "Site Plan Review",
+                            "description": "Ensures development respects natural constraints and protects environmental resources.",
+                            "requirements": [
+                                "May be referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision by planner",
+                                "Appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Variance",
+                            "description": "Allows deviations from height, setback, or floor area ratio standards.",
+                            "requirements": [
+                                "One of the most difficult permits to obtain",
+                                "Planning Division recommends against seeking unless absolutely necessary",
+                                "May be referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision - appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Master Sign Program",
+                            "description": "Required when more than four businesses on property with signs deviating from ministerial standards.",
+                            "requirements": [
+                                "Establishes site-specific ministerial design standards",
+                                "Not usually referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision - appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Sign Review",
+                            "description": "Required for larger signs or free-standing signs.",
+                            "requirements": [
+                                "Discretionary permit",
+                                "Not usually referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision - appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Tree Removal Permit",
+                            "description": "Limits removal of healthy, mature, native trees on non-agricultural properties.",
+                            "requirements": [
+                                "Not required in Coastal Zone (Coastal Permit may be required instead)",
+                                "Not usually referred to other agencies",
+                                "Public notice posted on site",
+                                "Administrative decision - appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Coastal Permit",
+                            "description": "Implements State Coastal Act and Local Coastal Program for development in Coastal Zone.",
+                            "requirements": [
+                                "May relate to development, use changes, or subdivisions",
+                                "Most referred to other public agencies",
+                                "Majority require public hearing before Deputy Zoning Administrator",
+                                "Public notice in newspaper and to neighbors",
+                                "Appealable to Planning Commission",
+                                "County approval can be appealed to California Coastal Commission"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "process",
+                    "name": "The Planning Review Process",
+                    "description": "Understanding what happens after you submit your application.",
+                    "items": [
+                        {
+                            "name": "Initial Review",
+                            "description": "First steps in reviewing your planning application.",
+                            "requirements": [
+                                "Planner reviews plans and County records",
+                                "Site inspection usually within a few weeks of submission",
+                                "Notice posted on property for neighbors",
+                                "Contact agencies (fire, water, sanitary districts) as soon as possible",
+                                "Planner determines completeness within 30 days",
+                                "30 days to resubmit missing information before application expires"
+                            ]
+                        },
+                        {
+                            "name": "Application Types",
+                            "description": "Three categories of planning applications with different processes.",
+                            "types": [
+                                {
+                                    "label": "Ministerial Projects",
+                                    "desc": "Evaluated for compliance with objective technical criteria. No public input relevant. Generally not appealable. Examples: Building Permits, ADU Permits, Use Permit Renewals."
+                                },
+                                {
+                                    "label": "Discretionary Projects",
+                                    "desc": "Evaluated for consistency with policies and guidelines. Public input relevant. Appealable. May require public hearing. Examples: Design Reviews, Variances, Conditional Use Permits."
+                                },
+                                {
+                                    "label": "Legislative Actions",
+                                    "desc": "Fundamentally political in nature. Only approved by Board of Supervisors. Examples: zoning changes. Relatively rare but most complex."
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Analysis and Evaluation",
+                            "description": "After application deemed complete.",
+                            "requirements": [
+                                "Letter sent when application deemed complete",
+                                "CEQA compliance assessment (most projects exempt)",
+                                "Planner assesses merits of exempt projects",
+                                "Meetings held if needed to discuss aspects with applicants or community",
+                                "Planner may visit neighbors' properties to gain perspective",
+                                "Public notice distributed for certain applications",
+                                "Decision must be issued within 3 months for discretionary projects"
+                            ]
+                        },
+                        {
+                            "name": "After Receiving Approval",
+                            "description": "Steps to take after your planning permit is approved.",
+                            "requirements": [
+                                "Most development projects need a Building Permit next",
+                                "Adjusted lot lines or new lots require maps and revised deeds",
+                                "Follow all conditions of approval",
+                                "Example condition: Install landscaping before occupancy",
+                                "Permits expire after 3 years if not vested",
+                                "Vest by obtaining Building Permit and substantially completing work"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "hearings",
+                    "name": "Public Hearings and Boards",
+                    "description": "Understanding the official bodies involved in planning decisions.",
+                    "items": [
+                        {
+                            "name": "Board of Supervisors",
+                            "description": "Five elected representatives who make final decisions on major issues.",
+                            "requirements": [
+                                "Governing body for unincorporated areas",
+                                "Makes decisions on ordinances and policies",
+                                "Hears appeals of Planning Commission decisions",
+                                "Appoints Planning Commission members"
+                            ]
+                        },
+                        {
+                            "name": "Planning Commission",
+                            "description": "Seven volunteers who review appeals and make recommendations.",
+                            "requirements": [
+                                "Reviews Community Plan amendments, Master Plans, Rezonings",
+                                "Has authority over appeals of staff or Deputy Zoning Administrator decisions",
+                                "Applicant/appellant has 10 minutes to speak",
+                                "Public usually given 3-5 minutes to speak",
+                                "PowerPoint presentations require advance submission (by Thursday before Monday hearing)",
+                                "Hearings recorded and videotaped - available online",
+                                "Decisions appealable to Board of Supervisors"
+                            ]
+                        },
+                        {
+                            "name": "Deputy Zoning Administrator",
+                            "description": "Senior planning staff authorized to issue decisions on certain applications.",
+                            "requirements": [
+                                "Responsible for Tentative Maps, Conditional Use Permits, most Coastal Permits",
+                                "Applicant speaks for 5 minutes",
+                                "Public speaks for 2 minutes each",
+                                "No PowerPoint presentations",
+                                "Speakers direct comments to Deputy Zoning Administrator only",
+                                "Hearings recorded - available online",
+                                "Decisions appealable to Planning Commission"
+                            ]
+                        },
+                        {
+                            "name": "Design Review Boards",
+                            "description": "Citizen advisory committees that make recommendations.",
+                            "boards": [
+                                {
+                                    "name": "Tamalpais Design Review Board",
+                                    "area": "Tamalpais Valley Community Plan area",
+                                    "schedule": "1st and 3rd Wednesdays, 7:00 PM",
+                                    "location": "Log Cabin, 60 Tennessee Valley Road"
+                                },
+                                {
+                                    "name": "Kentfield Planning Advisory Board",
+                                    "area": "Kentfield/Greenbrae (except Kent Woodlands)",
+                                    "schedule": "2nd and 4th Wednesdays, 7:30 PM",
+                                    "location": "College of Marin Administration Building"
+                                },
+                                {
+                                    "name": "Strawberry Design Review Board",
+                                    "area": "Strawberry Community Plan area",
+                                    "schedule": "1st and 3rd Mondays, 7:30 PM",
+                                    "location": "Strawberry Recreation Center"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "appeals",
+                    "name": "Appeals",
+                    "description": "How to appeal a planning decision and what to expect.",
+                    "items": [
+                        {
+                            "name": "Appeal Process",
+                            "description": "Anyone can appeal a discretionary planning permit decision.",
+                            "requirements": [
+                                "Staff/Deputy Zoning Administrator decisions appealed to Planning Commission",
+                                "Planning Commission decisions appealed to Board of Supervisors",
+                                "Hearings usually scheduled within 2 months of appeal submission",
+                                "Review is de novo - any aspect may be considered, not just appeal issues",
+                                "Staff schedules hearing and distributes public notices",
+                                "Staff prepares report, draft resolution, and gives PowerPoint presentation"
+                            ]
+                        },
+                        {
+                            "name": "Appeal Services and Costs",
+                            "description": "What's included in the appeal fee and what costs extra.",
+                            "requirements": [
+                                "Appeal fee covers administrative tasks, staff report, presentation, resolution revisions",
+                                "Services outside appeal fee scope billed on cost recovery basis",
+                                "Example: Review of revised project plans submitted to address appeal issues",
+                                "Planning Commission can accept or reject their previous action",
+                                "Board of Supervisors receives Planning Commission decision and decides"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "finishing",
+                    "name": "Finishing the Process",
+                    "description": "Final steps and ongoing requirements after permit approval.",
+                    "items": [
+                        {
+                            "name": "Conditions of Approval",
+                            "description": "Requirements you must meet to conduct permitted use or receive Building Permit.",
+                            "requirements": [
+                                "Review standardized conditions on Planning Division website",
+                                "Conditions range from procedural requirements to design modifications",
+                                "Must review during appeal period to contest any conditions",
+                                "After appeal period, must apply for amendment to change conditions",
+                                "Conditions include requirements from Environmental Health, Public Works, districts",
+                                "Verification needed before Building Permit approval or inspections"
+                            ]
+                        },
+                        {
+                            "name": "Substantial Conformance",
+                            "description": "Making changes to approved projects.",
+                            "requirements": [
+                                "Minor design refinements common between planning and building permit",
+                                "Request during Planning Consultation for significant changes",
+                                "Changes must be consistent with Development Code",
+                                "Cannot involve features specifically addressed in environmental review",
+                                "Cannot involve features that were basis for conditions or findings",
+                                "Cannot result in significant expansion of use",
+                                "If not substantially conforming, must seek permit amendment"
+                            ]
+                        },
+                        {
+                            "name": "Permit Vesting and Extensions",
+                            "description": "Time limits and how to extend your planning permit.",
+                            "requirements": [
+                                "Permits expire after 3 years unless conditions specify different limit",
+                                "Vest by obtaining Building Permit and substantially completing improvements",
+                                "Or vest by commencing use in compliance with conditions",
+                                "Or vest by recording Parcel Map or Final Map",
+                                "Note: Filing Building Permit application does NOT extend planning permit",
+                                "Apply to Planning Division for extension if can't vest in time",
+                                "Extensions issued ministerially except Coastal Permits (require public hearing)"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "fees",
+                    "name": "Planning Fees and Other Costs",
+                    "description": "Understanding the costs associated with your planning application and development.",
+                    "items": [
+                        {
+                            "name": "Planning Permit Fees",
+                            "description": "Two types of fee structures for planning applications.",
+                            "feeTypes": [
+                                {
+                                    "type": "Flat Fees",
+                                    "desc": "More predictable - initial fee usually covers full cost of planning application"
+                                },
+                                {
+                                    "type": "Retainer Fees",
+                                    "desc": "Initial deposit billed against during review. Additional fees due mid-way if needed. Unused fees refunded (within one hour of time spent)"
+                                }
+                            ],
+                            "requirements": [
+                                "Fees adopted by Board of Supervisors",
+                                "Meant to defray costs of reviewing application",
+                                "Check Planning Division fee schedule for specific amounts",
+                                "Talk to Building and Safety about Building Permit fees"
+                            ]
+                        },
+                        {
+                            "name": "Impact Fees",
+                            "description": "Fees to offset additional demand generated by development.",
+                            "fees": [
+                                {
+                                    "name": "Long Range Planning Surcharge",
+                                    "amount": "10% of Planning and Building Permit fees",
+                                    "when": "Paid when filing Planning application and Building Permit",
+                                    "leviedBy": "Planning Division"
+                                },
+                                {
+                                    "name": "Affordable Housing Impact Fee",
+                                    "amount": "$5-$10 per square foot for residential over 2,000 sq ft",
+                                    "example": "4,000 sq ft house = $20,000",
+                                    "when": "Paid when Building Permit issued",
+                                    "leviedBy": "Community Development Agency"
+                                },
+                                {
+                                    "name": "In-Lieu Housing Fee (Residential)",
+                                    "amount": "For fractional share less than 0.5 unit in subdivisions/multi-family",
+                                    "when": "Paid when map recorded or Building Permit issued",
+                                    "leviedBy": "Community Development Agency",
+                                    "reference": "See Development Code Section 22.22.090.B"
+                                },
+                                {
+                                    "name": "Jobs/Housing Linkage Fee",
+                                    "amount": "Based on development type and floor area",
+                                    "when": "Paid when Building Permit issued",
+                                    "leviedBy": "Community Development Agency",
+                                    "reference": "See Development Code Section 22.22.100"
+                                },
+                                {
+                                    "name": "Road Impact Fee",
+                                    "amount": "1% of Building Permit valuation over $10,000",
+                                    "example": "4,000 sq ft house at $150/sq ft = $6,000 fee",
+                                    "when": "Paid when Building Permit issued",
+                                    "leviedBy": "Department of Public Works"
+                                },
+                                {
+                                    "name": "Transportation Improvement Mitigation Fee",
+                                    "amount": "Applies in 5 zones (Atherton Ave, Northgate, San Geronimo Valley, Strawberry, Tamalpais)",
+                                    "when": "Paid when Building Permit issued",
+                                    "leviedBy": "Department of Public Works",
+                                    "note": "Fees adjusted every year"
+                                },
+                                {
+                                    "name": "In-Lieu Park Dedication Fee",
+                                    "amount": "Dwelling units × acres required × fair market value × 1.20",
+                                    "when": "Paid when Parcel or Final Map recorded",
+                                    "leviedBy": "Parks and Open Space Department",
+                                    "reference": "See Development Code Section 22.98.040"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Other Considerations",
+                            "description": "Additional costs to factor into your budget.",
+                            "requirements": [
+                                "Contact department responsible for each impact fee with questions",
+                                "Factor in fees from school districts",
+                                "Factor in fees from utility service providers",
+                                "Talk to builders about potential construction costs",
+                                "Budget for all costs before submitting application"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "contacts",
+                    "name": "School Districts and Utility Providers",
+                    "description": "Contact information for other agencies involved in development (all 415 area code unless noted).",
+                    "categories": [
+                        {
+                            "name": "School Districts",
+                            "contacts": [
+                                {"name": "Lagunitas", "phone": "488-4118"},
+                                {"name": "Mill Valley", "phone": "389-7700"},
+                                {"name": "Nicasio", "phone": "662-2184"},
+                                {"name": "Novato", "phone": "897-4201"},
+                                {"name": "Reed", "phone": "383-1116"},
+                                {"name": "Ross", "phone": "454-2162"},
+                                {"name": "Dixie", "phone": "492-3700"},
+                                {"name": "Kentfield", "phone": "925-2230"},
+                                {"name": "Laguna", "phone": "(707) 762-6051"},
+                                {"name": "Larkspur", "phone": "927-6960"},
+                                {"name": "San Rafael", "phone": "492-3205"}
+                            ]
+                        },
+                        {
+                            "name": "Water Districts",
+                            "contacts": [
+                                {"name": "MMWD", "phone": "945-1145"},
+                                {"name": "NMWD", "phone": "897-4133"},
+                                {"name": "Stinson Beach", "phone": "868-1333"},
+                                {"name": "Bolinas", "phone": "868-1224"}
+                            ]
+                        },
+                        {
+                            "name": "Fire Districts",
+                            "contacts": [
+                                {"name": "Marin County", "phone": "473-6566"},
+                                {"name": "Marinwood", "phone": "479-0122"},
+                                {"name": "Novato", "phone": "878-2620"},
+                                {"name": "Ross Valley", "phone": "258-4686"},
+                                {"name": "Kentfield", "phone": "453-7464"},
+                                {"name": "Southern Marin", "phone": "388-8182"},
+                                {"name": "Tiburon", "phone": "435-7200"},
+                                {"name": "Bolinas", "phone": "868-1566"},
+                                {"name": "Inverness", "phone": "669-7151"},
+                                {"name": "Stinson Beach", "phone": "868-0622"}
+                            ]
+                        },
+                        {
+                            "name": "Sewer Districts",
+                            "contacts": [
+                                {"name": "Novato", "phone": "892-1694"},
+                                {"name": "San Rafael", "phone": "454-4001"},
+                                {"name": "Sausalito/Marin City", "phone": "332-0244"},
+                                {"name": "Ross Valley", "phone": "259-2949"},
+                                {"name": "Las Gallinas Valley", "phone": "472-1734"},
+                                {"name": "Homestead Valley", "phone": "388-4796"},
+                                {"name": "Almonte", "phone": "388-8775"},
+                                {"name": "Alto", "phone": "388-3696"},
+                                {"name": "Central Marin", "phone": "459-1455"},
+                                {"name": "Southern Marin", "phone": "388-2402"},
+                                {"name": "Corte Madera", "phone": "927-5057"},
+                                {"name": "Richardson Bay", "phone": "388-1345"},
+                                {"name": "Tiburon", "phone": "435-1501"}
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "footer": {
+                "organization": "Marin County Planning Division",
+                "version": "Version 4",
+                "accessibility": "All County publications are available in alternative formats (Braille, Large Print, or CD), upon request.",
+                "contact": {
+                    "voice": "(415) 473-4381",
+                    "tdd": "473-3232",
+                    "email": "disabilityaccess@marincounty.org",
+                    "feedback": "Planning_feedback@marincounty.org"
+                }
+            }
+        };
+
+        function renderPage(data) {
+            const app = document.getElementById('app');
+            
+            // Build navigation
+            let navHTML = `
+                <nav>
+                    <h3>On This Page</h3>
+                    <ul>
+                        ${data.sections.map(section => 
+                            `<li><a href="#${section.id}">${section.name}</a></li>`
+                        ).join('')}
+                    </ul>
+                </nav>
+            `;
+            
+            // Build sections
+            let sectionsHTML = data.sections.map(section => {
+                let itemsHTML = '';
+                
+                if (section.items) {
+                    itemsHTML = section.items.map(item => {
+                    let contentHTML = `
+                        <div class="item">
+                            <h3>${item.name}</h3>
+                            ${item.description ? `<div class="item-description">${item.description}</div>` : ''}
+                    `;
+                    
+                    // Handle requirements
+                    if (item.requirements) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <ul>
+                                    ${item.requirements.map(req => `<li>${req}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+
+                    // Handle application types
+                    if (item.types) {
+                        contentHTML += `
+                            <div class="requirements">
+                                ${item.types.map(type => `
+                                    <div class="element-item">
+                                        <span class="element-label">${type.label}:</span> ${type.desc}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
+                    // Handle fee types
+                    if (item.feeTypes) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Fee Structures:</h4>
+                                ${item.feeTypes.map(feeType => `
+                                    <div class="element-item">
+                                        <span class="element-label">${feeType.type}:</span> ${feeType.desc}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
+                    // Handle fees
+                    if (item.fees) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Impact Fees:</h4>
+                                ${item.fees.map(fee => `
+                                    <div class="fee-item">
+                                        <div class="fee-label">${fee.name}</div>
+                                        <div><strong>Amount:</strong> ${fee.amount}</div>
+                                        ${fee.example ? `<div><strong>Example:</strong> ${fee.example}</div>` : ''}
+                                        ${fee.when ? `<div><strong>When Paid:</strong> ${fee.when}</div>` : ''}
+                                        ${fee.leviedBy ? `<div><strong>Levied By:</strong> ${fee.leviedBy}</div>` : ''}
+                                        ${fee.reference ? `<div><em>${fee.reference}</em></div>` : ''}
+                                        ${fee.note ? `<div><em>Note: ${fee.note}</em></div>` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
+                    // Handle boards
+                    if (item.boards) {
+                        contentHTML += `
+                            <div class="requirements">
+                                <h4>Design Review Boards:</h4>
+                                ${item.boards.map(board => `
+                                    <div class="info-box">
+                                        <h5>${board.name}</h5>
+                                        <div><strong>Area:</strong> ${board.area}</div>
+                                        <div><strong>Schedule:</strong> ${board.schedule}</div>
+                                        <div><strong>Location:</strong> ${board.location}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    contentHTML += `</div>`;
+                    return contentHTML;
+                }).join('');
+                }
+
+                // Handle contact categories
+                if (section.categories) {
+                    itemsHTML = section.categories.map(category => `
+                        <div class="item">
+                            <h3>${category.name}</h3>
+                            <div class="contact-grid">
+                                ${category.contacts.map(contact => `
+                                    <div class="contact-card">
+                                        <h5>${contact.name}</h5>
+                                        <p>${contact.phone}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                return `
+                    <section id="${section.id}" class="section">
+                        <h2>${section.name}</h2>
+                        ${section.description ? `<p class="section-description">${section.description}</p>` : ''}
+                        ${itemsHTML}
+                    </section>
+                `;
+            }).join('');
+            
+            // Build footer
+            let footerHTML = `
+                <footer>
+                    <p><strong>${data.footer.organization}</strong></p>
+                    <p>${data.footer.version}</p>
+                    <p>${data.footer.accessibility}</p>
+                    <p>Requests for accommodations: ${data.footer.contact.voice} (Voice) | ${data.footer.contact.tdd} (TDD/TTY)</p>
+                    <p>Email: ${data.footer.contact.email}</p>
+                    <p><strong>We value your feedback:</strong> ${data.footer.contact.feedback}</p>
+                    <p style="margin-top: 15px; font-style: italic;">Preparation is the key to success. We encourage you to familiarize yourself with all requirements before beginning your project.</p>
+                </footer>
+            `;
+            
+            // Assemble page
+            app.innerHTML = `
+                <header>
+                    <h1>${data.title}</h1>
+                    <p>A comprehensive guide to understanding the planning permit process in Marin County's unincorporated areas</p>
+                </header>
+                <div class="container">
+                    <div class="main-content">
+                        ${sectionsHTML}
+                        ${footerHTML}
+                    </div>
+                    ${navHTML}
+                </div>
+            `;
+        }
+        
+        // Render the page
+        renderPage(guideData);
+    </script>
+</body>
+</html>

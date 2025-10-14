@@ -1,0 +1,119 @@
+.marin-search-toggle {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #000;
+  font-family: "Jost", sans-serif;
+  padding: 0;
+  margin: -3px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.marin-search-toggle[aria-expanded=true] .marin-search-toggle-icon {
+  background-color: #000;
+}
+
+.marin-search-toggle-icon .marin-search-icon-close {
+  display: none;
+}
+
+.marin-search-toggle[aria-expanded=true] .marin-search-icon-open {
+  display: none;
+}
+
+.marin-search-toggle[aria-expanded=true] .marin-search-icon-close {
+  display: block;
+}
+
+.marin-search-toggle-icon {
+  height: 44px;
+  width: 44px;
+  background-color: #1c75bc;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+}
+
+.marin-search-toggle-icon svg {
+  height: 21px;
+  width: 21px;
+}
+
+.search-form-block {
+  padding: 2rem 0;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.search-input {
+  position: relative;
+  width: 65%;
+}
+
+.search-input--center {
+  margin: 0 auto;
+}
+
+.search-input-field {
+  border: 1px solid #000;
+  padding: 0.5rem 5rem 0.5rem 1rem;
+  border-radius: 1000px;
+  width: 100%;
+  height: 65px;
+}
+
+.search-input-button {
+  border-radius: 1000px;
+  position: absolute;
+  right: 2px;
+  height: 59px;
+  width: 59px;
+  margin-top: 3px;
+  cursor: pointer;
+  border: none;
+  background-color: #1c75bc;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input-button svg {
+  margin-top: 4px;
+  height: 50%;
+  width: 50%;
+}
+
+.block-marin-search-form {
+  display: none;
+}
+
+.facets {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.facets ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.facets a {
+  text-decoration: none;
+}
+
+.facets a:hover {
+  text-decoration: underline;
+}
+
+.facet-selected {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #000000;
+}
